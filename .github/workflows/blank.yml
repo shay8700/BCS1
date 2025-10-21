@@ -1,36 +1,74 @@
-# This is a basic workflow to help you get started with Actions
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mortgage-Ready Credit Review</title>
+  <meta name="description" content="Find disputable errors, quick score wins, and get lender-ready fast." />
+  <style>
+    :root { --navy:#1C3D5A; --teal:#3E8E9C; --bg:#0e1626; --card:#121a2a; --text:#e8eefc; --muted:#a7b4d6; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background:linear-gradient(180deg, var(--bg), #0b1220 70%); color:var(--text);}
+    .wrap { max-width:980px; margin:0 auto; padding:28px 18px 64px; }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .logo-mark { width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,var(--teal),#7edec0); display:grid; place-items:center; color:#00121b; font-weight:900; }
+    .cta { display:inline-block; background:linear-gradient(135deg, var(--teal), #7edec0); color:#00121b; text-decoration:none; padding:12px 18px; border-radius:12px; font-weight:800; box-shadow:0 10px 24px rgba(62,142,156,.35);}
+    .hero { margin-top:18px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:28px; }
+    h1 { font-size: clamp(28px, 5vw, 44px); line-height:1.1; margin: 0 0 10px; }
+    .lead { color:var(--muted); margin: 6px 0 20px; }
+    .pill { display:inline-block; background:#0d1a29; border:1px solid rgba(255,255,255,.08); padding:8px 10px; border-radius:999px; font-size:12px; color:#cfe0ff; margin-right:6px; }
+  </style>
+  <script>
+  async function loadConfig() {
+    let cfg = { form_url: '', booking_link: '' };
+    try {
+      const res = await fetch('config.json');
+      if (res.ok) cfg = Object.assign(cfg, await res.json());
+    } catch (e) {}
+    const url = new URL(window.location.href);
+    const form = url.searchParams.get('form');
+    const book = url.searchParams.get('book');
+    if (form) cfg.form_url = decodeURIComponent(form);
+    if (book) cfg.booking_link = decodeURIComponent(book);
+    document.querySelectorAll('a[data-cta]').forEach(a => a.href = cfg.form_url || '#');
+    document.querySelectorAll('[data-booking-link]').forEach(a => a.href = cfg.booking_link || '#');
+    const debug = document.getElementById('debug');
+    if (debug) {
+      debug.innerHTML = `Form: <a href="${cfg.form_url}" target="_blank">${cfg.form_url||'(not set)'} </a><br>Booking: <a href="${cfg.booking_link}" target="_blank">${cfg.booking_link||'(not set)'} </a>`;
+    }
+  }
+  window.addEventListener('DOMContentLoaded', loadConfig);
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <div style="display:flex;align-items:center;gap:10px;color:#dbe6ff;font-weight:800">
+        <div class="logo-mark">BC</div> Blue Cloud Solution
+      </div>
+      <a class="cta" data-cta href="#">Get Free Review</a>
+    </div>
 
-name: CI
+    <div class="hero">
+      <h1>Mortgage-Ready Credit Review</h1>
+      <p class="lead">Find disputable errors, quick score wins, and get lender-ready fast.</p>
+      <div style="margin:6px 0 18px;">
+        <span class="pill">FCRA-aware guidance</span>
+        <span class="pill">Fast intake</span>
+        <span class="pill">Free 10-minute call</span>
+      </div>
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+      <p id="debug" style="font-size:12px;opacity:.7;margin:8px 0 0;"></p>
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+      <div style="margin-top:16px;">
+        <a class="cta" data-cta href="#">Start My Free Credit Review</a>
+        <a style="margin-left:12px; text-decoration:underline; color:#bfe7ff;" data-booking-link href="#">Book a time</a>
+      </div>
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+      <p class="lead" style="margin-top:16px;">Tip: Override links via URL params: <code>?form=FORM_URL&book=BOOKING_URL</code></p>
+    </div>
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+    <p style="margin-top:24px; opacity:.6; font-size:12px;">© Blue Cloud Solution</p>
+  </div>
+</body>
+</html>
