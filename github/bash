@@ -1,0 +1,5 @@
+git clone https://github.com/shay8700/BCS
+# add the folders/files above
+git add .
+git commit -m "Add Blue Cloud funnels"
+git push origin main
